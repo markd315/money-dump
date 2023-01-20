@@ -1,4 +1,5 @@
 import json
+import anvil.google.auth
 from _template import FinancialShitTemplate
 import anvil.server
 
@@ -6,6 +7,8 @@ import anvil.server
 class FinancialShitForm(FinancialShitTemplate):
 
     def __init__(self, **properties):
+        login = anvil.google.auth.login()
+        print(login)
         self.init_components_base(**properties)
         self.addHandlers()
 

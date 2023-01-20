@@ -4,7 +4,7 @@ A fantasy baseball mode with real lineups and bullpen configurations that replay
 
 ### How to run the webapp server
 ```commandline
-anvil-app-server --app FinancialShitApp
+anvil-app-server --app FinancialShitApp --google-client-id 993595845237-q5llasdn2l27h6rk1p18rancmpf8gdhm.apps.googleusercontent.com --google-client-secret $GOOGLE_SECRET
 ```
 
 There is even a cool webapp which can run in a docker container. Be sure to change the origin setting in the Dockerfile if you host it somewhere else.

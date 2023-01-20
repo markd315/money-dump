@@ -20,7 +20,7 @@ RUN anvil-app-server || true
 VOLUME /apps
 WORKDIR /apps
 
-COPY LineupApp LineupApp
+COPY FinancialShitApp FinancialShitApp
 RUN mkdir /anvil-data
 
 COPY lessons lessons
@@ -36,4 +36,4 @@ COPY __init__.py __init__.py
 EXPOSE 3030
 
 ENTRYPOINT ["anvil-app-server", "--data-dir", "/anvil-data", "--port", "3030"]
-CMD ["--app", "LineupApp"]
+CMD ["--app", "FinancialShitApp", "--google-client-id", "993595845237-q5llasdn2l27h6rk1p18rancmpf8gdhm.apps.googleusercontent.com", "--google-client-secret", "$GOOGLE_SECRET"]
