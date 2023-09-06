@@ -4,6 +4,7 @@ digestible financial advice that goes down easy and comes out in one smooth snak
 
 ### How to run the webapp server
 ```commandline
+export GOOGLE_SECRET=...
 anvil-app-server --app FinancialShitApp --google-client-id 993595845237-q5llasdn2l27h6rk1p18rancmpf8gdhm.apps.googleusercontent.com --google-client-secret $GOOGLE_SECRET
 ```
 

@@ -1,3 +1,4 @@
 .anvil-data/
 .idea/
 geckodriver.log
+secrets.txt
