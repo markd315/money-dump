@@ -1,18 +1,20 @@
-FROM python:3
+FROM ubuntu:20.04
+
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+
+RUN apt-get update -y \
+&& apt-get install -y software-properties-common \
+&& add-apt-repository ppa:deadsnakes/ppa \
+&& apt-get install openjdk-8-jdk -y \
+&& apt-get install python3-pip -y \
+&& export JAVA_HOME \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
+
 
 ARG GOOGLE_SECRET
 
-RUN apt-get -yyy update && apt-get -yyy install software-properties-common && \
-    wget -O- https://apt.corretto.aws/corretto.key | apt-key add - && \
-    add-apt-repository 'deb https://apt.corretto.aws stable main'
-
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    (dpkg -i google-chrome-stable_current_amd64.deb || apt install -y --fix-broken) && \
-    rm google-chrome-stable_current_amd64.deb
-
-
-RUN apt-get -yyy update && apt-get -yyy install java-1.8.0-amazon-corretto-jdk ghostscript
-
+RUN apt-get -yyy update && apt-get -yyy install software-properties-common
 
 COPY requirements.txt requirements.txt
 RUN pip install anvil-app-server
@@ -30,13 +32,9 @@ COPY lessons lessons
 RUN useradd anvil
 RUN useradd python
 RUN chown -R anvil:anvil /anvil-data
-RUN chmod -R 777 /apps/cached-box-scores
 USER anvil
 
-COPY __init__.py __init__.py
+EXPOSE 6061
 
-
-EXPOSE 443
-
-ENTRYPOINT ["anvil-app-server", "--data-dir", "/anvil-data", "--port", "443", "--origin", "https://finance.zanzalaz.com"]
+ENTRYPOINT ["anvil-app-server", "--data-dir", "/anvil-data", "--port", "6061"]
 CMD ["--app", "FinancialShitApp", "--google-client-id", "993595845237-q5llasdn2l27h6rk1p18rancmpf8gdhm.apps.googleusercontent.com", "--google-client-secret", "$GOOGLE_SECRET"]
